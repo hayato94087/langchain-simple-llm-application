@@ -15,12 +15,10 @@ const messages = [
   new HumanMessage("昔々あるところにおじいさんとおばあさんがいました"),
 ];
 
-// result
-const modelResult = await model.invoke(messages);
-
 // parser
 const parser = new StringOutputParser();
 
-// parsed result
-const parsedResult = await parser.invoke(modelResult);
-console.log(parsedResult);
+const chain = model.pipe(parser);
+
+const result = await chain.invoke(messages);
+console.log(result);
