@@ -7,7 +7,7 @@ import 'dotenv/config'
 const model = new ChatOpenAI({model: "gpt-3.5-turbo"});
 
 // system
-const system =  `あなたは入力された単語を英語に変換するアシスタントです`;
+const system = `あなたは入力された単語を英語に変換するアシスタントです`;
 
 // messages
 const messages = [
@@ -17,4 +17,10 @@ const messages = [
 
 // result
 const modelResult = await model.invoke(messages);
-console.log(modelResult);
+
+// parser
+const parser = new StringOutputParser();
+
+// parsed result
+const parsedResult = await parser.invoke(modelResult);
+console.log(parsedResult);
